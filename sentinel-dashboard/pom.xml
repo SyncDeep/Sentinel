@@ -9,7 +9,8 @@
         <version>1.8.5</version>
     </parent>
 
-    <artifactId>sentinel-dashboard</artifactId>
+    <groupId>com.sync.boot.sentinel</groupId>
+    <artifactId>sentinel-dashboard-english</artifactId>
     <packaging>jar</packaging>
 
     <properties>
@@ -154,6 +155,7 @@
             </plugins>
         </pluginManagement>
         <plugins>
+            <!--
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -170,14 +172,12 @@
                     </execution>
                 </executions>
             </plugin>
+            -->
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-deploy-plugin</artifactId>
                 <version>${maven.deploy.version}</version>
-                <configuration>
-                    <skip>true</skip>
-                </configuration>
             </plugin>
         </plugins>
 
@@ -195,4 +195,17 @@
             </resource>
         </resources>
     </build>
+
+    <distributionManagement>
+        <repository>
+            <id>sync.release</id>
+            <name>Sync Release Repository</name>
+            <url>https://nexus.basicit.co.kr/repository/maven-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>sync.snapshot</id>
+            <name>Sync Snapshot Repository</name>
+            <url>https://nexus.basicit.co.kr/repository/maven-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
 </project>
