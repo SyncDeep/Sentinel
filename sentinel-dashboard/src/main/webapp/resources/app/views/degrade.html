@@ -4,7 +4,7 @@
   </div>
   <div class="col-md-6">
     <button class="btn btn-default-inverse" style="float: right; margin-right: 10px;" ng-disabled="!macInputModel" ng-click="addNewRule()">
-      <i class="fa fa-plus"></i>&nbsp;&nbsp;新增熔断规则</button>
+      <i class="fa fa-plus"></i>&nbsp;&nbsp;Add Degrade Rule</button>
   </div>
 </div>
 
@@ -15,13 +15,13 @@
     <div class="col-md-12">
       <div class="card">
         <div class="inputs-header">
-          <span class="brand" style="font-size: 13px;">熔断规则</span>
+          <span class="brand" style="font-size: 13px;">Degrade Rule</span>
           <!--<button class="btn btn-danger" style="float: right;margin-right: 10px;height: 30px;font-size: 12px;" ng-click="disableAll()">全部禁用</button>-->
-          <button class="btn btn-primary" style="float: right; margin-right: 10px; height: 30px;font-size: 12px;" ng-click="getMachineRules()">刷新</button>
-          <input class="form-control witdh-200" placeholder="关键字" ng-model="searchKey">
+          <button class="btn btn-primary" style="float: right; margin-right: 10px; height: 30px;font-size: 12px;" ng-click="getMachineRules()">Refresh</button>
+          <input class="form-control witdh-200" placeholder="Keywords..." ng-model="searchKey">
           <div class="control-group" style="float:right;margin-right: 10px;margin-bottom: -10px;">
             <selectize id="gsInput" class="selectize-input-200" config="macsInputConfig" options="macsInputOptions" ng-model="macInputModel"
-              placeholder="机器"></selectize>
+              placeholder="Machines"></selectize>
           </div>
         </div>
 
@@ -31,19 +31,19 @@
             <thead>
               <tr style="background: #F3F5F7;">
                 <td style="width: 40%">
-                  资源名
+                  Resource
                 </td>
                 <td style="width: 10%;">
-                  熔断策略
+                  Strategy
                 </td>
                 <td style="width: 10%;">
-                  阈值
+                  Threshold
                 </td>
                 <td style="width: 10%;">
-                  熔断时长(s)
+                  Time Window (s)
                 </td>
                 <td style="width: 12%;">
-                  操作
+                  Operations
                 </td>
               </tr>
             </thead>
@@ -53,9 +53,9 @@
                 <td style="word-wrap:break-word;word-break:break-all;">{{rule.resource}}</td>
                 <!--<td style="word-wrap:break-word;word-break:break-all;">{{rule.limitApp }}</td>-->
                 <td>
-                  <span ng-if="rule.grade == 0">慢调用比例</span>
-                  <span ng-if="rule.grade == 1" title="异常比例">异常比例</span>
-                  <span ng-if="rule.grade == 2" title="异常数">异常数</span>
+                  <span ng-if="rule.grade == 0">RT</span>
+                  <span ng-if="rule.grade == 1" title="Exception Ratio">Exception Ratio</span>
+                  <span ng-if="rule.grade == 2" title="Exception Count">Exception Count</span>
                 </td>
                 <td style="word-wrap:break-word;word-break:break-all;">
                   {{rule.count}}
@@ -65,8 +65,8 @@
                 </td>
 
                 <td>
-                  <button class="btn btn-xs btn-default" type="button" ng-click="editRule(rule)" style="font-size: 12px; height:25px;">编辑</button>
-                  <button class="btn btn-xs btn-default" type="button" ng-click="deleteRule(rule)" style="font-size: 12px; height:25px;">删除</button>
+                  <button class="btn btn-xs btn-default" type="button" ng-click="editRule(rule)" style="font-size: 12px; height:25px;">Edit</button>
+                  <button class="btn btn-xs btn-default" type="button" ng-click="deleteRule(rule)" style="font-size: 12px; height:25px;">Delete</button>
                 </td>
               </tr>
             </tbody>
@@ -78,12 +78,11 @@
             on-page-change="">
           </dir-pagination-controls>
           <div class="tools" style="">
-            <span>共 {{rulesPageConfig.totalCount}} 条记录, </span>
+            <span>{{rulesPageConfig.totalCount}} items in total. </span>
             <span>
-              每页
-              <input class="form-control" ng-model="rulesPageConfig.pageSize"> 条记录,
+              <input class="form-control" ng-model="rulesPageConfig.pageSize"> items per page.
             </span>
-            <span>第 {{rulesPageConfig.currentPageIndex}} / {{rulesPageConfig.totalPage}} 页</span>
+            <span>Page {{rulesPageConfig.currentPageIndex}} / {{rulesPageConfig.totalPage}}</span>
           </div>
           <!-- .tools -->
         </div>

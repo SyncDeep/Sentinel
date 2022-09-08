@@ -66,13 +66,13 @@ app.controller('SentinelClusterSingleController', ['$scope', '$stateParams', 'ng
                 } else {
                     $scope.stateVO = {};
                     if (data.code === UNSUPPORTED_CODE) {
-                        $scope.loadError = {message: '机器 ' + mac[0] + ':' + mac[1] + ' 的 Sentinel 客户端版本不支持集群限流，请升级至 1.4.0 以上版本并引入相关依赖。'}
+                        $scope.loadError = {message: 'Server ' + mac[0] + ':' + mac[1] + ' The Sentinel client version does not support cluster current limiting, please upgrade to version 1.4.0 or later and introduce related dependencies.'}
                     } else {
                         $scope.loadError = {message: data.msg};
                     }
                 }
             }).error((data, header, config, status) => {
-                $scope.loadError = {message: '未知错误'};
+                $scope.loadError = {message: 'Unknown Error'};
             });
         }
 
@@ -80,20 +80,20 @@ app.controller('SentinelClusterSingleController', ['$scope', '$stateParams', 'ng
 
         function checkValidClientConfig(stateVO) {
             if (!stateVO.client || !stateVO.client.clientConfig) {
-                alert('不合法的配置');
+                alert('invalid configuration');
                 return false;
             }
             let config = stateVO.client.clientConfig;
             if (!config.serverHost || config.serverHost.trim() == '') {
-                alert('请输入有效的 Token Server IP');
+                alert('Please enter a valid Token Server IP');
                 return false;
             }
             if (config.serverPort === undefined || config.serverPort <= 0 ||  config.serverPort > 65535) {
-                alert('请输入有效的 Token Server 端口');
+                alert('Please enter a valid Token Server port');
                 return false;
             }
             if (config.requestTimeout === undefined || config.requestTimeout <= 0) {
-                alert('请输入有效的请求超时时长');
+                alert('Please enter a valid request timeout period');
                 return false;
             }
             return true;
@@ -116,41 +116,41 @@ app.controller('SentinelClusterSingleController', ['$scope', '$stateParams', 'ng
             request.clientConfig = stateVO.client.clientConfig;
             ClusterStateService.modifyClusterConfig(request).success(function (data) {
                 if (data.code == 0 && data.data) {
-                    alert('修改集群限流客户端配置成功');
+                    alert('Modify the cluster current limiting client configuration successfully');
                     window.location.reload();
                 } else {
                     if (data.code === UNSUPPORTED_CODE) {
-                        alert('机器 ' + mac[0] + ':' + mac[1] + ' 的 Sentinel 客户端版本不支持集群限流客户端，请升级至 1.4.0 以上版本并引入相关依赖。');
+                        alert('Server ' + mac[0] + ':' + mac[1] + ' The Sentinel client version of the current version does not support the cluster current limit client, please upgrade to version 1.4.0 or later and introduce related dependencies.');
                     } else {
-                        alert('修改失败：' + data.msg);
+                        alert('fail to edit：' + data.msg);
                     }
                 }
             }).error((data, header, config, status) => {
-                alert('未知错误');
+                alert('Unknown Error');
             });
         }
 
         function checkValidServerConfig(stateVO) {
             if (!stateVO.server || !stateVO.server.transport) {
-                alert('不合法的配置');
+                alert('invalid configuration');
                 return false;
             }
             if (stateVO.server.namespaceSetStr === undefined || stateVO.server.namespaceSetStr == '') {
-                alert('请输入有效的命名空间集合（多个 namespace 以 , 分隔）');
+                alert('Please enter a valid set of namespaces (multiple namespaces are separated by , )');
                 return false;
             }
             let transportConfig = stateVO.server.transport;
             if (transportConfig.port === undefined || transportConfig.port <= 0 || transportConfig.port > 65535) {
-                alert('请输入有效的 Token Server 端口');
+                alert('Please enter a valid Token Server port');
                 return false;
             }
             let flowConfig = stateVO.server.flow;
             if (flowConfig.maxAllowedQps === undefined || flowConfig.maxAllowedQps < 0) {
-                alert('请输入有效的最大允许 QPS');
+                alert('Please enter a valid maximum allowed QPS');
                 return false;
             }
             // if (transportConfig.idleSeconds === undefined || transportConfig.idleSeconds <= 0) {
-            //     alert('请输入有效的连接清理时长 (idleSeconds)');
+            //     alert('Please enter a valid connection cleanup duration (idleSeconds)');
             //     return false;
             // }
             return true;
@@ -175,29 +175,29 @@ app.controller('SentinelClusterSingleController', ['$scope', '$stateParams', 'ng
             request.namespaceSet = convertStrToNamespaceSet(stateVO.server.namespaceSetStr);
             ClusterStateService.modifyClusterConfig(request).success(function (data) {
                 if (data.code == 0 && data.data) {
-                    alert('修改集群限流服务端配置成功');
+                    alert('Modify the cluster current limiting server configuration successfully');
                     window.location.reload();
                 } else {
                     if (data.code === UNSUPPORTED_CODE) {
-                        alert('机器 ' + mac[0] + ':' + mac[1] + ' 的 Sentinel 客户端版本不支持集群限流服务端，请升级至 1.4.0 以上版本并引入相关依赖。');
+                        alert('Server ' + mac[0] + ':' + mac[1] + ' The Sentinel client version does not support cluster current limiting server, please upgrade to version 1.4.0 or later and introduce related dependencies。');
                     } else {
-                        alert('修改失败：' + data.msg);
+                        alert('fail to edit：' + data.msg);
                     }
                 }
             }).error((data, header, config, status) => {
-                alert('未知错误');
+                alert('Unknown Error');
             });
         }
 
 
         $scope.saveConfig = () => {
-            let ok = confirm('是否确定修改集群限流配置？');
+            let ok = confirm('Are you sure to modify the cluster throttling configuration?');
             if (!ok) {
                 return;
             }
             let mode = $scope.stateVO.stateInfo.mode;
             if (mode != 1 && mode != 0) {
-                alert('未知的集群限流模式');
+                alert('Unknown cluster throttling mode');
                 return;
             }
             if (mode == 0) {

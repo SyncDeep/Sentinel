@@ -65,15 +65,15 @@ app.controller('GatewayFlowCtl', ['$scope', '$stateParams', 'GatewayFlowService'
         });
     }
 
-    $scope.intervalUnits = [{val: 0, desc: '秒'}, {val: 1, desc: '分'}, {val: 2, desc: '时'}, {val: 3, desc: '天'}];
+    $scope.intervalUnits = [{val: 0, desc: 'Second'}, {val: 1, desc: 'Minute'}, {val: 2, desc: 'Hour'}, {val: 3, desc: 'Day'}];
 
     var gatewayFlowRuleDialog;
     $scope.editRule = function (rule) {
       $scope.currentRule = angular.copy(rule);
       $scope.gatewayFlowRuleDialog = {
-        title: '编辑网关流控规则',
+        title: 'Edit gateway flow control rules',
         type: 'edit',
-        confirmBtnText: '保存'
+        confirmBtnText: 'Save'
       };
       gatewayFlowRuleDialog = ngDialog.open({
         template: '/app/views/dialog/gateway/flow-rule-dialog.html',
@@ -99,9 +99,9 @@ app.controller('GatewayFlowCtl', ['$scope', '$stateParams', 'GatewayFlowService'
       };
 
       $scope.gatewayFlowRuleDialog = {
-        title: '新增网关流控规则',
+        title: 'Add gateway flow control rules',
         type: 'add',
-        confirmBtnText: '新增'
+        confirmBtnText: 'Save'
       };
 
       gatewayFlowRuleDialog = ngDialog.open({
@@ -158,7 +158,7 @@ app.controller('GatewayFlowCtl', ['$scope', '$stateParams', 'GatewayFlowService'
           getMachineRules();
           gatewayFlowRuleDialog.close();
         } else {
-          alert('新增网关流控规则失败!' + data.msg);
+          alert('Failed to add gateway flow control rule!' + data.msg);
         }
       });
     };
@@ -173,7 +173,7 @@ app.controller('GatewayFlowCtl', ['$scope', '$stateParams', 'GatewayFlowService'
             confirmDialog.close();
           }
         } else {
-          alert('修改网关流控规则失败!' + data.msg);
+          alert('Failed to modify gateway flow control rules!' + data.msg);
         }
       });
     };
@@ -182,11 +182,11 @@ app.controller('GatewayFlowCtl', ['$scope', '$stateParams', 'GatewayFlowService'
     $scope.deleteRule = function (rule) {
       $scope.currentRule = rule;
       $scope.confirmDialog = {
-        title: '删除网关流控规则',
+        title: 'Delete gateway flow control rules',
         type: 'delete_rule',
-        attentionTitle: '请确认是否删除如下规则',
-        attention: 'API名称: ' + rule.resource + ', ' + (rule.grade == 1 ? 'QPS阈值' : '线程数') + ': ' + rule.count,
-        confirmBtnText: '删除',
+        attentionTitle: 'aRE YOU SURE to delete the following rules',
+        attention: 'API name: ' + rule.resource + ', ' + (rule.grade == 1 ? 'QPS threshold' : 'Threads') + ': ' + rule.count,
+        confirmBtnText: 'Delete',
       };
       confirmDialog = ngDialog.open({
         template: '/app/views/dialog/confirm-dialog.html',
@@ -209,7 +209,7 @@ app.controller('GatewayFlowCtl', ['$scope', '$stateParams', 'GatewayFlowService'
           getMachineRules();
           confirmDialog.close();
         } else {
-          alert('删除网关流控规则失败!' + data.msg);
+          alert('Failed to delete gateway flow control rule!' + data.msg);
         }
       });
     };

@@ -35,15 +35,15 @@ app.controller('SentinelClusterAppTokenClientListController', ['$scope', '$state
 
         function checkValidClientConfig(config) {
             if (!config.serverHost || config.serverHost.trim() == '') {
-                alert('请输入有效的 Token Server IP');
+                alert('Please enter a valid Token Server IP');
                 return false;
             }
             if (config.serverPort === undefined || config.serverPort <= 0 ||  config.serverPort > 65535) {
-                alert('请输入有效的 Token Server 端口');
+                alert('Please enter a valid Token Server port');
                 return false;
             }
             if (config.requestTimeout === undefined || config.requestTimeout <= 0) {
-                alert('请输入有效的请求超时时长');
+                alert('Please enter a valid request timeout period');
                 return false;
             }
             return true;
@@ -67,17 +67,17 @@ app.controller('SentinelClusterAppTokenClientListController', ['$scope', '$state
             };
             ClusterStateService.modifyClusterConfig(request).success((data) => {
                 if (data.code === 0 && data.data) {
-                    alert('修改 Token Client 配置成功');
+                    alert('Modify the Token Client configuration successfully');
                     window.location.reload();
                 } else {
                     if (data.code === UNSUPPORTED_CODE) {
-                        alert('机器 ' + id + ' 的 Sentinel 没有引入集群限流客户端，请升级至 1.4.0 以上版本并引入相关依赖。');
+                        alert('Server ' + id + ' Sentinel does not introduce cluster current limiting client, please upgrade to version 1.4.0 or later and introduce related dependencies.');
                     } else {
-                        alert('修改失败：' + data.msg);
+                        alert('fail to edit：' + data.msg);
                     }
                 }
             }).error((data, header, config, status) => {
-                alert('未知错误');
+                alert('Unknown Error');
             });
         };
 
@@ -91,14 +91,14 @@ app.controller('SentinelClusterAppTokenClientListController', ['$scope', '$state
                     } else {
                         $scope.clientVOList = [];
                         if (data.code === UNSUPPORTED_CODE) {
-                            $scope.loadError = {message: '该应用的 Sentinel 客户端不支持集群限流，请升级至 1.4.0 以上版本并引入相关依赖。'}
+                            $scope.loadError = {message: 'The Sentinel client of this application does not support cluster current limiting, please upgrade to version 1.4.0 or later and introduce related dependencies. '}
                         } else {
                             $scope.loadError = {message: data.msg};
                         }
                     }
                 })
                 .error(() => {
-                    $scope.loadError = {message: '未知错误'};
+                    $scope.loadError = {message: 'Unknown Error'};
                 });
         }
 

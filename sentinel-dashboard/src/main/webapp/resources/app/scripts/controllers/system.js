@@ -62,9 +62,9 @@ app.controller('SystemCtl', ['$scope', '$stateParams', 'SystemService', 'ngDialo
     $scope.editRule = function (rule) {
       $scope.currentRule = angular.copy(rule);
       $scope.systemRuleDialog = {
-        title: '编辑系统保护规则',
+        title: 'Edit System Rule',
         type: 'edit',
-        confirmBtnText: '保存'
+        confirmBtnText: 'Save'
       };
       systemRuleDialog = ngDialog.open({
         template: '/app/views/dialog/system-rule-dialog.html',
@@ -83,9 +83,9 @@ app.controller('SystemCtl', ['$scope', '$stateParams', 'SystemService', 'ngDialo
         port: mac[1],
       };
       $scope.systemRuleDialog = {
-        title: '新增系统保护规则',
+        title: 'Add New System Rule',
         type: 'add',
-        confirmBtnText: '新增'
+        confirmBtnText: 'Add'
       };
       systemRuleDialog = ngDialog.open({
         template: '/app/views/dialog/system-rule-dialog.html',
@@ -115,22 +115,22 @@ app.controller('SystemCtl', ['$scope', '$stateParams', 'SystemService', 'ngDialo
         ruleTypeDesc = 'RT';
         ruleTypeCount = rule.avgRt;
       } else if (rule.maxThread != -1) {
-        ruleTypeDesc = '线程数';
+        ruleTypeDesc = 'Thread Count';
         ruleTypeCount = rule.maxThread;
       } else if (rule.qps != -1) {
         ruleTypeDesc = 'QPS';
         ruleTypeCount = rule.qps;
       }else if (rule.highestCpuUsage != -1) {
-          ruleTypeDesc = 'CPU 使用率';
+          ruleTypeDesc = 'CPU Usage';
           ruleTypeCount = rule.highestCpuUsage;
       }
 
       $scope.confirmDialog = {
-        title: '删除系统保护规则',
+        title: 'Delete Rule',
         type: 'delete_rule',
-        attentionTitle: '请确认是否删除如下系统保护规则',
-        attention: '阈值类型: ' + ruleTypeDesc + ', 阈值: ' + ruleTypeCount,
-        confirmBtnText: '删除',
+        attentionTitle: 'Please confirm the following rule to be deleted',
+        attention: 'Type: ' + ruleTypeDesc + ', threshold: ' + ruleTypeCount,
+        confirmBtnText: 'Delete',
       };
       confirmDialog = ngDialog.open({
         template: '/app/views/dialog/confirm-dialog.html',
@@ -164,16 +164,16 @@ app.controller('SystemCtl', ['$scope', '$stateParams', 'SystemService', 'ngDialo
           getMachineRules();
           confirmDialog.close();
         } else if (data.msg != null) {
-            alert('失败：' + data.msg);
+            alert('Failed：' + data.msg);
         } else {
-            alert('失败：未知错误');
+            alert('Failed：Unknown error');
         }
       });
     }
 
     function addNewRule(rule) {
       if (rule.grade == 4 && (rule.highestCpuUsage < 0 || rule.highestCpuUsage > 1)) {
-        alert('CPU 使用率模式的取值范围应为 [0.0, 1.0]，对应 0% - 100%');
+        alert('The value range of CPU usage mode should be [0.0, 1.0], corresponding to 0% - 100%');
         return;
       }
       SystemService.newRule(rule).success(function (data) {
@@ -181,9 +181,9 @@ app.controller('SystemCtl', ['$scope', '$stateParams', 'SystemService', 'ngDialo
           getMachineRules();
           systemRuleDialog.close();
         } else if (data.msg != null) {
-          alert('失败：' + data.msg);
+          alert('Failed：' + data.msg);
         } else {
-          alert('失败：未知错误');
+          alert('Failed：Unknown error');
         }
       });
     }
@@ -198,9 +198,9 @@ app.controller('SystemCtl', ['$scope', '$stateParams', 'SystemService', 'ngDialo
             confirmDialog.close();
           }
         } else if (data.msg != null) {
-          alert('失败：' + data.msg);
+          alert('Failed：' + data.msg);
         } else {
-          alert('失败：未知错误');
+          alert('Failed：Unknown error');
         }
       });
     }

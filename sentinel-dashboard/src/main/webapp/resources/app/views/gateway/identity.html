@@ -12,11 +12,11 @@
       <div class="card">
         <div class="inputs-header">
           <span class="brand" style="font-size: 13px;">请求链路</span>
-          <button class="btn btn-primary" style="float: right; margin-right: 10px; height: 30px;font-size: 12px;" ng-click="queryIdentities()">刷新</button>
-          <input class="form-control witdh-200" placeholder="关键字" ng-model="searchKey" ng-change="searchChange(searchKey)">
+          <button class="btn btn-primary" style="float: right; margin-right: 10px; height: 30px;font-size: 12px;" ng-click="queryIdentities()">Refresh</button>
+          <input class="form-control witdh-200" placeholder="Keywords..." ng-model="searchKey" ng-change="searchChange(searchKey)">
           <div class="control-group" style="float:right;margin-right: 10px;margin-bottom: -10px;">
             <selectize id="gsInput" class="selectize-input-200" config="macsInputConfig" options="macsInputOptions" ng-model="macInputModel"
-              placeholder="机器"></selectize>
+              placeholder="Machines"></selectize>
           </div>
         </div>
 
@@ -38,7 +38,7 @@
                   <td style="width: 6%;">平均 RT</td>
                   <td style="width: 6%;">分钟通过</td>
                   <td style="width: 6%;">分钟拒绝</td>
-                  <td style="width: 20%">操作</td>
+                  <td style="width: 20%">Operations</td>
                 </tr>
                 <tr></tr>
               </thead>

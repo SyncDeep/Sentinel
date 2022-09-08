@@ -72,9 +72,9 @@ app.controller('GatewayApiCtl', ['$scope', '$stateParams', 'GatewayApiService', 
     $scope.editApi = function (api) {
       $scope.currentApi = angular.copy(api);
       $scope.gatewayApiDialog = {
-        title: '编辑自定义 API',
+        title: 'Edit custom API',
         type: 'edit',
-        confirmBtnText: '保存'
+        confirmBtnText: 'Save'
       };
       gatewayApiDialog = ngDialog.open({
         template: '/app/views/dialog/gateway/api-dialog.html',
@@ -94,9 +94,9 @@ app.controller('GatewayApiCtl', ['$scope', '$stateParams', 'GatewayApiService', 
         predicateItems: [{matchStrategy: 0, pattern: ''}]
       };
       $scope.gatewayApiDialog = {
-        title: '新增自定义 API',
+        title: 'Add custom API',
         type: 'add',
-        confirmBtnText: '新增'
+        confirmBtnText: 'Save'
       };
       gatewayApiDialog = ngDialog.open({
         template: '/app/views/dialog/gateway/api-dialog.html',
@@ -133,7 +133,7 @@ app.controller('GatewayApiCtl', ['$scope', '$stateParams', 'GatewayApiService', 
           getApis();
           gatewayApiDialog.close();
         } else {
-          alert('新增自定义API失败!' + data.msg);
+          alert('Failed to add custom API!' + data.msg);
         }
       });
     };
@@ -148,7 +148,7 @@ app.controller('GatewayApiCtl', ['$scope', '$stateParams', 'GatewayApiService', 
             confirmDialog.close();
           }
         } else {
-          alert('修改自定义API失败!' + data.msg);
+          alert('Failed to modify custom API!' + data.msg);
         }
       });
     };
@@ -157,11 +157,11 @@ app.controller('GatewayApiCtl', ['$scope', '$stateParams', 'GatewayApiService', 
     $scope.deleteApi = function (api) {
       $scope.currentApi = api;
       $scope.confirmDialog = {
-        title: '删除自定义API',
+        title: 'Remove custom API',
         type: 'delete_api',
-        attentionTitle: '请确认是否删除如下自定义API',
-        attention: 'API名称: ' + api.apiName,
-        confirmBtnText: '删除',
+        attentionTitle: 'Are you sure to delete the custom API',
+        attention: 'API name: ' + api.apiName,
+        confirmBtnText: 'Delete',
       };
       confirmDialog = ngDialog.open({
         template: '/app/views/dialog/confirm-dialog.html',
@@ -184,7 +184,7 @@ app.controller('GatewayApiCtl', ['$scope', '$stateParams', 'GatewayApiService', 
           getApis();
           confirmDialog.close();
         } else {
-          alert('删除自定义API失败!' + data.msg);
+          alert('Failed to delete custom API!' + data.msg);
         }
       });
     };
@@ -203,7 +203,7 @@ app.controller('GatewayApiCtl', ['$scope', '$stateParams', 'GatewayApiService', 
     $scope.removeMatchPattern = function($index) {
       if ($scope.currentApi.predicateItems.length <= 1) {
         // Should never happen since no remove button will display when only one predicateItem.
-        alert('至少有一个匹配规则');
+        alert('At least one matching rule');
         return;
       }
       $scope.currentApi.predicateItems.splice($index, 1);

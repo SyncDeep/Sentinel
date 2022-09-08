@@ -19,7 +19,7 @@ app.controller('MachineCtl', ['$scope', '$stateParams', 'MachineService',
       $scope.reverse = ($scope.propertyName === propertyName) ? !$scope.reverse : false;
       $scope.propertyName = propertyName;
     };
-    
+
     $scope.reloadMachines = function() {
       MachineService.getAppMachines($scope.app).success(
         function (data) {
@@ -32,7 +32,7 @@ app.controller('MachineCtl', ['$scope', '$stateParams', 'MachineService',
                   healthy++;
               }
               if (!item.hostname) {
-                item.hostname = '未知'
+                item.hostname = 'Unknown'
               }
             })
             $scope.healthyCount = healthy;
@@ -44,7 +44,7 @@ app.controller('MachineCtl', ['$scope', '$stateParams', 'MachineService',
         }
       );
     };
-    
+
     $scope.removeMachine = function(ip, port) {
       if (!confirm("confirm to remove machine [" + ip + ":" + port + "]?")) {
         return;
@@ -59,7 +59,7 @@ app.controller('MachineCtl', ['$scope', '$stateParams', 'MachineService',
         }
       );
     };
-    
+
     $scope.reloadMachines();
-    
+
   }]);

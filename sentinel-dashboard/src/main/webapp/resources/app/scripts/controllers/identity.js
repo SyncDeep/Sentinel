@@ -62,10 +62,10 @@ app.controller('IdentityCtl', ['$scope', '$stateParams', 'IdentityService',
       };
 
       flowRuleDialogScope.flowRuleDialog = {
-        title: '新增流控规则',
+        title: 'Add New Flow Rule',
         type: 'add',
-        confirmBtnText: '新增',
-        saveAndContinueBtnText: '新增并继续添加',
+        confirmBtnText: 'Add',
+        saveAndContinueBtnText: 'Add then continue',
         showAdvanceButton: true
       };
       // $scope.flowRuleDialog = {
@@ -98,10 +98,10 @@ app.controller('IdentityCtl', ['$scope', '$stateParams', 'IdentityService',
           let url = '/dashboard/flow/' + $scope.app;
           $location.path(url);
         } else {
-          alert('失败：' + data.msg);
+          alert('Failed：' + data.msg);
         }
       }).error((data, header, config, status) => {
-          alert('未知错误');
+          alert('Unknown Error');
       });
     }
 
@@ -113,7 +113,7 @@ app.controller('IdentityCtl', ['$scope', '$stateParams', 'IdentityService',
         if (data.code === 0) {
           flowRuleDialog.close();
         } else {
-            alert('失败：' + data.msg);
+            alert('Failed：' + data.msg);
         }
       });
     }
@@ -140,10 +140,10 @@ app.controller('IdentityCtl', ['$scope', '$stateParams', 'IdentityService',
       };
 
       degradeRuleDialogScope.degradeRuleDialog = {
-        title: '新增熔断规则',
+        title: 'Add Degrade Rule',
         type: 'add',
-        confirmBtnText: '新增',
-        saveAndContinueBtnText: '新增并继续添加'
+        confirmBtnText: 'Add',
+        saveAndContinueBtnText: 'Add then continue'
       };
       degradeRuleDialogScope.saveRule = saveDegradeRule;
       degradeRuleDialogScope.saveRuleAndContinue = saveDegradeRuleAndContinue;
@@ -166,7 +166,7 @@ app.controller('IdentityCtl', ['$scope', '$stateParams', 'IdentityService',
           var url = '/dashboard/degrade/' + $scope.app;
           $location.path(url);
         } else {
-          alert('失败：' + data.msg);
+          alert('Failed：' + data.msg);
         }
       });
     }
@@ -179,7 +179,7 @@ app.controller('IdentityCtl', ['$scope', '$stateParams', 'IdentityService',
         if (data.code === 0) {
           degradeRuleDialog.close();
         } else {
-            alert('失败：' + data.msg);
+            alert('Failed：' + data.msg);
         }
       });
     }
@@ -198,13 +198,13 @@ app.controller('IdentityCtl', ['$scope', '$stateParams', 'IdentityService',
                   let url = '/dashboard/authority/' + $scope.app;
                   $location.path(url);
               } else {
-                  alert('添加规则失败：' + data.msg);
+                  alert('Failed to add new rule: ' + data.msg);
               }
           }).error((data) => {
               if (data) {
-                  alert('添加规则失败：' + data.msg);
+                  alert('Failed to add new rule: ' + data.msg);
               } else {
-                  alert("添加规则失败：未知错误");
+                  alert("Failed to add new rule: Unknown error");
               }
           });
       }
@@ -218,13 +218,13 @@ app.controller('IdentityCtl', ['$scope', '$stateParams', 'IdentityService',
               if (data.success) {
                   authorityRuleDialog.close();
               } else {
-                  alert('添加规则失败：' + data.msg);
+                  alert('Failed to add new rule: ' + data.msg);
               }
           }).error((data) => {
               if (data) {
-                  alert('添加规则失败：' + data.msg);
+                  alert('Failed to add new rule: ' + data.msg);
               } else {
-                  alert("添加规则失败：未知错误");
+                  alert("Failed to add new rule: Unknown error");
               }
           });
       }
@@ -247,10 +247,10 @@ app.controller('IdentityCtl', ['$scope', '$stateParams', 'IdentityService',
           };
 
           authorityRuleDialogScope.authorityRuleDialog = {
-              title: '新增授权规则',
+              title: 'Add New Authority Rule',
               type: 'add',
-              confirmBtnText: '新增',
-              saveAndContinueBtnText: '新增并继续添加'
+              confirmBtnText: 'Add',
+              saveAndContinueBtnText: 'Add then continue'
           };
           authorityRuleDialogScope.saveRule = saveAuthorityRule;
           authorityRuleDialogScope.saveRuleAndContinue = saveAuthorityRuleAndContinue;
@@ -277,13 +277,13 @@ app.controller('IdentityCtl', ['$scope', '$stateParams', 'IdentityService',
                   let url = '/dashboard/paramFlow/' + $scope.app;
                   $location.path(url);
               } else {
-                  alert('添加热点规则失败：' + data.msg);
+                  alert('Failed to add new rule: ' + data.msg);
               }
           }).error((data) => {
               if (data) {
-                  alert('添加热点规则失败：' + data.msg);
+                  alert('Failed to add new rule: ' + data.msg);
               } else {
-                  alert("添加热点规则失败：未知错误");
+                  alert("Failed to add new rule: Unknown error");
               }
           });
       }
@@ -297,13 +297,13 @@ app.controller('IdentityCtl', ['$scope', '$stateParams', 'IdentityService',
               if (data.success) {
                   paramFlowRuleDialog.close();
               } else {
-                  alert('添加热点规则失败：' + data.msg);
+                  alert('Failed to add new rule: ' + data.msg);
               }
           }).error((data) => {
               if (data) {
-                  alert('添加热点规则失败：' + data.msg);
+                  alert('Failed to add new rule: ' + data.msg);
               } else {
-                  alert("添加热点规则失败：未知错误");
+                  alert("Failed to add new rule: Unknown error");
               }
           });
       }
@@ -337,10 +337,10 @@ app.controller('IdentityCtl', ['$scope', '$stateParams', 'IdentityService',
           };
 
           paramFlowRuleDialogScope.paramFlowRuleDialog = {
-              title: '新增热点规则',
+              title: 'Add New Parameter Rule',
               type: 'add',
-              confirmBtnText: '新增',
-              saveAndContinueBtnText: '新增并继续添加',
+              confirmBtnText: 'Add',
+              saveAndContinueBtnText: 'Add then continue',
               supportAdvanced: false,
               showAdvanceButton: true
           };

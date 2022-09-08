@@ -1,6 +1,6 @@
 /**
  * Parameter flow control controller.
- * 
+ *
  * @author Eric Zhao
  */
 angular.module('sentinelDashboardApp').controller('ParamFlowController', ['$scope', '$stateParams', 'ParamFlowService', 'ngDialog',
@@ -113,14 +113,15 @@ angular.module('sentinelDashboardApp').controller('ParamFlowController', ['$scop
             $scope.rules = [];
             $scope.rulesPageConfig.totalCount = 0;
             if (data.code === UNSUPPORTED_CODE) {
-              $scope.loadError = {message: "机器 " + mac[0] + ":" + mac[1] + " 的 Sentinel 客户端版本不支持热点参数限流功能，请升级至 0.2.0 以上版本并引入 sentinel-parameter-flow-control 依赖。"}
+              $scope.loadError = {message: "The Sentinel client of machine <" + mac[0] + ":" + mac[1] + ">does not support parameter flow control. Please upgrade to 0.2.0 or later version, " +
+                    "and make sure add <sentinel-parameter-flow-control> dependency to your service."}
             } else {
               $scope.loadError = {message: data.msg}
             }
           }
         })
         .error((data, header, config, status) => {
-          $scope.loadError = {message: "未知错误"}
+          $scope.loadError = {message: "Unknown failure"}
         });
     }
     $scope.getMachineRules = getMachineRules;
@@ -134,9 +135,9 @@ angular.module('sentinelDashboardApp').controller('ParamFlowController', ['$scop
         $scope.currentRule.rule.durationInSec = 1;
       }
       $scope.paramFlowRuleDialog = {
-        title: '编辑热点规则',
+        title: 'Edit Parameter Rule',
         type: 'edit',
-        confirmBtnText: '保存',
+        confirmBtnText: 'Save',
         supportAdvanced: true,
         showAdvanceButton: rule.rule.paramFlowItemList === undefined || rule.rule.paramFlowItemList.length <= 0
       };
@@ -172,10 +173,9 @@ angular.module('sentinelDashboardApp').controller('ParamFlowController', ['$scop
         }
       };
       $scope.paramFlowRuleDialog = {
-        title: '新增热点规则',
+        title: 'Add New Parameter Rule',
         type: 'add',
-        confirmBtnText: '新增',
-        supportAdvanced: true,
+        confirmBtnText: 'Add',
         showAdvanceButton: true,
       };
       paramFlowRuleDialog = ngDialog.open({
@@ -211,13 +211,13 @@ angular.module('sentinelDashboardApp').controller('ParamFlowController', ['$scop
           getMachineRules();
           paramFlowRuleDialog.close();
         } else {
-          alert('添加规则失败：' + data.msg);
+          alert('Failed to add new rule: ' + data.msg);
         }
       }).error((data) => {
         if (data) {
-          alert('添加规则失败：' + data.msg);
+          alert('Failed to add new rule: ' + data.msg);
         } else {
-          alert("添加规则失败：未知错误");
+          alert("Failed to add new rule: Unknown error");
         }
       });
     }
@@ -225,7 +225,7 @@ angular.module('sentinelDashboardApp').controller('ParamFlowController', ['$scop
     function saveRuleAndPush(rule, edit) {
       ParamFlowService.saveRule(rule).success(function (data) {
         if (data.success) {
-          alert("修改规则成功");
+          alert("Rule successfully edited");
           getMachineRules();
           if (edit) {
             paramFlowRuleDialog.close();
@@ -233,20 +233,20 @@ angular.module('sentinelDashboardApp').controller('ParamFlowController', ['$scop
             confirmDialog.close();
           }
         } else {
-          alert('修改规则失败：' + data.msg);
+          alert('Failed to edit rule: ' + data.msg);
         }
       }).error((data) => {
         if (data) {
-          alert('修改规则失败：' + data.msg);
+          alert('Failed to edit rule: ' + data.msg);
         } else {
-          alert("修改规则失败：未知错误");
+          alert("Failed to edit rule: Unknown error");
         }
       });
     }
 
     function deleteRuleAndPush(entity) {
       if (entity.id === undefined || isNaN(entity.id)) {
-        alert('规则 ID 不合法！');
+        alert('Invalid rule ID');
         return;
       }
       ParamFlowService.deleteRule(entity).success((data) => {
@@ -254,13 +254,13 @@ angular.module('sentinelDashboardApp').controller('ParamFlowController', ['$scop
           getMachineRules();
           confirmDialog.close();
         } else {
-          alert('删除规则失败：' + data.msg);
+          alert('Failed to delete the rule: ' + data.msg);
         }
       }).error((data) => {
         if (data) {
-          alert('删除规则失败：' + data.msg);
+          alert('Failed to delete the rule: ' + data.msg);
         } else {
-          alert("删除规则失败：未知错误");
+          alert("Failed to delete the rule: Unknown error");
         }
       });
     };
@@ -270,12 +270,12 @@ angular.module('sentinelDashboardApp').controller('ParamFlowController', ['$scop
       $scope.currentRule = ruleEntity;
       console.log('deleting: ' + ruleEntity);
       $scope.confirmDialog = {
-        title: '删除热点规则',
+        title: 'Delete Parameter Flow Rule',
         type: 'delete_rule',
-        attentionTitle: '请确认是否删除如下热点参数限流规则',
-        attention: '资源名: ' + ruleEntity.rule.resource + ', 热点参数索引: ' + ruleEntity.rule.paramIdx +
-            ', 限流模式: ' + (ruleEntity.rule.grade === 1 ? 'QPS' : '未知') + ', 限流阈值: ' + ruleEntity.rule.count,
-        confirmBtnText: '删除',
+        attentionTitle: 'Please confirm the following rule to be deleted',
+        attention: 'Resource name: ' + ruleEntity.rule.resource + ', parameter index: ' + ruleEntity.rule.paramIdx +
+            ', mode: ' + (ruleEntity.rule.grade === 1 ? 'QPS' : 'unknown') + ', threshold: ' + ruleEntity.rule.count,
+        confirmBtnText: 'Delete',
       };
       confirmDialog = ngDialog.open({
         template: '/app/views/dialog/confirm-dialog.html',

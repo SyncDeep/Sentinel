@@ -79,10 +79,10 @@ app.controller('GatewayIdentityCtl', ['$scope', '$stateParams', 'IdentityService
       };
 
       gatewayFlowRuleDialogScope.gatewayFlowRuleDialog = {
-        title: '新增网关流控规则',
+        title: 'Add gateway flow control rules',
         type: 'add',
-        confirmBtnText: '新增',
-        saveAndContinueBtnText: '新增并继续添加',
+        confirmBtnText: 'Save',
+        saveAndContinueBtnText: 'Save And Continue',
         showAdvanceButton: true
       };
 
@@ -140,10 +140,10 @@ app.controller('GatewayIdentityCtl', ['$scope', '$stateParams', 'IdentityService
           let url = '/dashboard/gateway/flow/' + $scope.app;
           $location.path(url);
         } else {
-          alert('失败!');
+          alert('Fail!');
         }
       }).error((data, header, config, status) => {
-          alert('未知错误');
+          alert('Error');
       });
     }
 
@@ -155,7 +155,7 @@ app.controller('GatewayIdentityCtl', ['$scope', '$stateParams', 'IdentityService
         if (data.code == 0) {
           gatewayFlowRuleDialog.close();
         } else {
-          alert('失败!');
+          alert('fail!');
         }
       });
     }
@@ -179,10 +179,10 @@ app.controller('GatewayIdentityCtl', ['$scope', '$stateParams', 'IdentityService
       };
 
       degradeRuleDialogScope.degradeRuleDialog = {
-        title: '新增降级规则',
+        title: 'Add downgrade rules',
         type: 'add',
-        confirmBtnText: '新增',
-        saveAndContinueBtnText: '新增并继续添加'
+        confirmBtnText: 'Save',
+        saveAndContinueBtnText: 'Save And Continue'
       };
       degradeRuleDialogScope.saveRule = saveDegradeRule;
       degradeRuleDialogScope.saveRuleAndContinue = saveDegradeRuleAndContinue;
@@ -205,7 +205,7 @@ app.controller('GatewayIdentityCtl', ['$scope', '$stateParams', 'IdentityService
           var url = '/dashboard/degrade/' + $scope.app;
           $location.path(url);
         } else {
-          alert('失败!');
+          alert('fail!');
         }
       });
     }
@@ -218,7 +218,7 @@ app.controller('GatewayIdentityCtl', ['$scope', '$stateParams', 'IdentityService
         if (data.code == 0) {
           degradeRuleDialog.close();
         } else {
-          alert('失败!');
+          alert('fail!');
         }
       });
     }

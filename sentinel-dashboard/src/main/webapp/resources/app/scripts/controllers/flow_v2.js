@@ -121,12 +121,12 @@ app.controller('FlowControllerV2', ['$scope', '$stateParams', 'FlowServiceV2', '
     $scope.deleteRule = function (rule) {
       $scope.currentRule = rule;
       $scope.confirmDialog = {
-        title: '删除流控规则',
+        title: 'Delete Flow Rule',
         type: 'delete_rule',
-        attentionTitle: '请确认是否删除如下流控规则',
-        attention: '资源名: ' + rule.resource + ', 流控应用: ' + rule.limitApp
-          + ', 阈值类型: ' + (rule.grade == 0 ? '线程数' : 'QPS') + ', 阈值: ' + rule.count,
-        confirmBtnText: '删除',
+        attentionTitle: 'Please confirm the following rule to be deleted',
+        attention: 'Resource name: ' + rule.resource + ', limit Origin: ' + rule.limitApp
+          + ', metric type: ' + (rule.grade == 0 ? 'thread count' : 'QPS') + ', threshold: ' + rule.count,
+        confirmBtnText: 'Delete',
       };
       confirmDialog = ngDialog.open({
         template: '/app/views/dialog/confirm-dialog.html',
@@ -149,7 +149,7 @@ app.controller('FlowControllerV2', ['$scope', '$stateParams', 'FlowServiceV2', '
           getMachineRules();
           confirmDialog.close();
         } else {
-          alert('失败!');
+          alert('Failed!');
         }
       });
     };
@@ -160,7 +160,7 @@ app.controller('FlowControllerV2', ['$scope', '$stateParams', 'FlowServiceV2', '
           getMachineRules();
           flowRuleDialog.close();
         } else {
-          alert('失败!');
+          alert('Failed!');
         }
       });
     };
@@ -182,7 +182,7 @@ app.controller('FlowControllerV2', ['$scope', '$stateParams', 'FlowServiceV2', '
             confirmDialog.close();
           }
         } else {
-          alert('失败!');
+          alert('Failed!');
         }
       });
     }

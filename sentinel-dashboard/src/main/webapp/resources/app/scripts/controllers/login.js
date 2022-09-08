@@ -9,12 +9,12 @@ app.controller('LoginCtl', ['$scope', '$state', '$window', 'AuthService',
 
     $scope.login = function () {
       if (!$scope.username) {
-        alert('请输入用户名');
+        alert('please enter user name');
         return;
       }
 
       if (!$scope.password) {
-        alert('请输入密码');
+        alert('Please enter password');
         return;
       }
 

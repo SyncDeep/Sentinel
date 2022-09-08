@@ -50,45 +50,45 @@ app.service('DegradeService', ['$http', function ($http) {
 
   this.checkRuleValid = function (rule) {
       if (rule.resource === undefined || rule.resource === '') {
-          alert('资源名称不能为空');
+          alert('Resource name cannot be empty');
           return false;
       }
       if (rule.grade === undefined || rule.grade < 0) {
-          alert('未知的降级策略');
+          alert('Invalid strategy');
           return false;
       }
       if (rule.count === undefined || rule.count === '' || rule.count < 0) {
-          alert('降级阈值不能为空或小于 0');
+          alert('Degrade threshold should be at least 0');
           return false;
       }
       if (rule.timeWindow == undefined || rule.timeWindow === '' || rule.timeWindow <= 0) {
-          alert('熔断时长必须大于 0s');
+          alert('Degrade time window should be positive');
           return false;
       }
       if (rule.minRequestAmount == undefined || rule.minRequestAmount <= 0) {
-          alert('最小请求数目需大于 0');
+          alert('Minimum number of requests must be greater than 0');
           return false;
       }
       if (rule.statIntervalMs == undefined || rule.statIntervalMs <= 0) {
-          alert('统计窗口时长需大于 0s');
+          alert('Statistics window duration must be greater than 0s');
           return false;
       }
       if (rule.statIntervalMs !== undefined && rule.statIntervalMs > 60 * 1000 * 2) {
-          alert('统计窗口时长最大 120s');
+          alert('The maximum duration of the statistics window is 120s');
           return false;
       }
-      // 异常比率类型.
+      // Anomaly ratio type.
       if (rule.grade == 1 && rule.count > 1) {
-          alert('异常比率超出范围：[0.0 - 1.0]');
+          alert('Exception ratio exceeds the range: [0.0 - 1.0]');
           return false;
       }
       if (rule.grade == 0) {
           if (rule.slowRatioThreshold == undefined) {
-              alert('慢调用比率不能为空');
+              alert('Slow call ratio cannot be empty');
               return false;
           }
           if (rule.slowRatioThreshold < 0 || rule.slowRatioThreshold > 1) {
-              alert('慢调用比率超出范围：[0.0 - 1.0]');
+              alert('Slow call ratio out of range: [0.0 - 1.0]');
               return false;
           }
       }

@@ -44,13 +44,13 @@ app.service('GatewayApiService', ['$http', function ($http) {
 
   this.checkApiValid = function (api, apiNames) {
     if (api.apiName === undefined || api.apiName === '') {
-      alert('API名称不能为空');
+      alert('API name cannot be empty');
       return false;
     }
 
     if (api.predicateItems == null || api.predicateItems.length === 0) {
       // Should never happen since no remove button will display when only one predicateItem.
-      alert('至少有一个匹配规则');
+      alert('At least one matching rule');
       return false;
     }
 
@@ -58,13 +58,13 @@ app.service('GatewayApiService', ['$http', function ($http) {
       var predicateItem = api.predicateItems[i];
       var pattern = predicateItem.pattern;
       if (pattern === undefined || pattern === '') {
-        alert('匹配串不能为空，请检查');
+        alert('Match string cannot be empty, please check');
         return false;
       }
     }
 
     if (apiNames.indexOf(api.apiName) !== -1) {
-      alert('API名称(' + api.apiName + ')已存在');
+      alert('APIName(' + api.apiName + ') Exist');
       return false;
     }
 

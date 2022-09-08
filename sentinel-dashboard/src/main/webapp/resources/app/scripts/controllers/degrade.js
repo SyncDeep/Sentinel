@@ -47,9 +47,9 @@ app.controller('DegradeCtl', ['$scope', '$stateParams', 'DegradeService', 'ngDia
     $scope.editRule = function (rule) {
       $scope.currentRule = angular.copy(rule);
       $scope.degradeRuleDialog = {
-        title: '编辑熔断规则',
+        title: 'Edit Degrade Rule',
         type: 'edit',
-        confirmBtnText: '保存'
+        confirmBtnText: 'Save'
       };
       degradeRuleDialog = ngDialog.open({
         template: '/app/views/dialog/degrade-rule-dialog.html',
@@ -71,9 +71,9 @@ app.controller('DegradeCtl', ['$scope', '$stateParams', 'DegradeService', 'ngDia
         statIntervalMs: 1000,
       };
       $scope.degradeRuleDialog = {
-        title: '新增熔断规则',
+        title: 'Add Degrade Rule',
         type: 'add',
-        confirmBtnText: '新增'
+        confirmBtnText: 'Add'
       };
       degradeRuleDialog = ngDialog.open({
         template: '/app/views/dialog/degrade-rule-dialog.html',
@@ -97,13 +97,13 @@ app.controller('DegradeCtl', ['$scope', '$stateParams', 'DegradeService', 'ngDia
     function parseDegradeMode(grade) {
         switch (grade) {
             case 0:
-              return '慢调用比例';
+              return 'RT';
             case 1:
-              return '异常比例';
+              return 'Exception Ratio';
             case 2:
-              return '异常数';
+              return 'Exception Count';
             default:
-              return '未知';
+              return 'Unknown';
         }
     }
 
@@ -111,12 +111,12 @@ app.controller('DegradeCtl', ['$scope', '$stateParams', 'DegradeService', 'ngDia
     $scope.deleteRule = function (rule) {
       $scope.currentRule = rule;
       $scope.confirmDialog = {
-        title: '删除熔断规则',
+        title: 'Delete Degrade Rule',
         type: 'delete_rule',
-        attentionTitle: '请确认是否删除如下熔断规则',
-        attention: '资源名: ' + rule.resource +
-            ', 熔断策略: ' + parseDegradeMode(rule.grade) + ', 阈值: ' + rule.count,
-        confirmBtnText: '删除',
+        attentionTitle: 'Please confirm the following rule to be deleted',
+        attention: 'Resource name: ' + rule.resource +
+            ', degrade strategy: ' + parseDegradeMode(rule.grade) + ', threshold: ' + rule.count,
+        confirmBtnText: 'Delete',
       };
       confirmDialog = ngDialog.open({
         template: '/app/views/dialog/confirm-dialog.html',
@@ -139,7 +139,7 @@ app.controller('DegradeCtl', ['$scope', '$stateParams', 'DegradeService', 'ngDia
           getMachineRules();
           confirmDialog.close();
         } else {
-          alert('失败：' + data.msg);
+          alert('Failed：' + data.msg);
         }
       });
     };
@@ -150,7 +150,7 @@ app.controller('DegradeCtl', ['$scope', '$stateParams', 'DegradeService', 'ngDia
           getMachineRules();
           degradeRuleDialog.close();
         } else {
-          alert('失败：' + data.msg);
+          alert('Failed：' + data.msg);
         }
       });
     };
@@ -165,7 +165,7 @@ app.controller('DegradeCtl', ['$scope', '$stateParams', 'DegradeService', 'ngDia
             confirmDialog.close();
           }
         } else {
-          alert('失败：' + data.msg);
+          alert('Failed：' + data.msg);
         }
       });
     }

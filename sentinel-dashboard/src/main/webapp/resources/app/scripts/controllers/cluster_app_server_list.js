@@ -227,13 +227,13 @@ app.controller('SentinelClusterAppServerListController', ['$scope', '$stateParam
                 } else {
                     $scope.appClusterMachineList = {};
                     if (data.code === UNSUPPORTED_CODE) {
-                        $scope.loadError = {message: '该应用的 Sentinel 客户端不支持集群限流，请升级至 1.4.0 以上版本并引入相关依赖。'}
+                        $scope.loadError = {message: 'The Sentinel client of this application does not support cluster current limiting, please upgrade to version 1.4.0 or later and introduce related dependencies.'}
                     } else {
                         $scope.loadError = {message: data.msg};
                     }
                 }
             }).error(() => {
-                $scope.loadError = {message: '未知错误'};
+                $scope.loadError = {message: 'unknown error'};
             });
         }
 
@@ -241,9 +241,9 @@ app.controller('SentinelClusterAppServerListController', ['$scope', '$stateParam
         $scope.newServerDialog = () => {
             retrieveClusterAssignInfoOfApp();
             $scope.serverAssignDialogData = {
-                title: '新增 Token Server',
+                title: 'Add Token Server',
                 type: 'add',
-                confirmBtnText: '保存',
+                confirmBtnText: 'Save',
                 serverData: {
                     serverType: 0,
                     clientSet: [],
@@ -275,13 +275,13 @@ app.controller('SentinelClusterAppServerListController', ['$scope', '$stateParam
                         }
                     }
                     if (!d) {
-                        alert('状态错误');
+                        alert('status error');
                         return;
                     }
                     $scope.serverAssignDialogData = {
-                        title: 'Token Server 分配编辑',
+                        title: 'Assign Token Server ',
                         type: 'edit',
-                        confirmBtnText: '保存',
+                        confirmBtnText: 'Save',
                         serverData: {
                             currentServer: d.machineId,
                             belongToApp: serverVO.belongToApp,
@@ -300,13 +300,13 @@ app.controller('SentinelClusterAppServerListController', ['$scope', '$stateParam
                     });
                 } else {
                     if (data.code === UNSUPPORTED_CODE) {
-                        $scope.loadError = {message: '该应用的 Sentinel 客户端不支持集群限流，请升级至 1.4.0 以上版本并引入相关依赖。'}
+                        $scope.loadError = {message: 'The Sentinel client of this application does not support cluster current limiting, please upgrade to version 1.4.0 or later and introduce related dependencies.'}
                     } else {
                         $scope.loadError = {message: data.msg};
                     }
                 }
             }).error(() => {
-                $scope.loadError = {message: '未知错误'};
+                $scope.loadError = {message: 'unknown error'};
             });
         };
 
@@ -315,7 +315,7 @@ app.controller('SentinelClusterAppServerListController', ['$scope', '$stateParam
         }
 
         function doApplyNewSingleServerAssign() {
-            let ok = confirm('是否确认执行变更？');
+            let ok = confirm('Are you sure to execute the change?');
             if (!ok) {
                 return;
             }
@@ -338,7 +338,7 @@ app.controller('SentinelClusterAppServerListController', ['$scope', '$stateParam
                     let failedServerSet = data.data.failedServerSet;
                     let failedClientSet = data.data.failedClientSet;
                     if (failedClientSet.length === 0 && failedServerSet.length === 0) {
-                        alert('全部推送成功');
+                        alert('All pushed successfully');
                     } else {
                         let failedSet = [];
                         if (failedServerSet) {
@@ -352,24 +352,24 @@ app.controller('SentinelClusterAppServerListController', ['$scope', '$stateParam
                             });
                         }
 
-                        alert('推送完毕。失败机器列表：' + JSON.stringify(failedSet));
+                        alert('The push is complete. list of failed server：' + JSON.stringify(failedSet));
                     }
 
                     location.reload();
                 } else {
                     if (data.code === UNSUPPORTED_CODE) {
-                        alert('该应用的 Sentinel 客户端不支持集群限流，请升级至 1.4.0 以上版本并引入相关依赖。');
+                        alert('The Sentinel client of this application does not support cluster current limiting, please upgrade to version 1.4.0 or later and introduce related dependencies.');
                     } else {
-                        alert('推送失败：' + data.msg);
+                        alert('Push failed：' + data.msg);
                     }
                 }
             }).error(() => {
-                alert('未知错误');
+                alert('Unknown Error');
             });
         }
 
         function doApplySingleServerAssignEdit() {
-            let ok = confirm('是否确认执行变更？');
+            let ok = confirm('Are you sure you want to execute the change?');
             if (!ok) {
                 return;
             }
@@ -393,7 +393,7 @@ app.controller('SentinelClusterAppServerListController', ['$scope', '$stateParam
                     let failedServerSet = data.data.failedServerSet;
                     let failedClientSet = data.data.failedClientSet;
                     if (failedClientSet.length === 0 && failedServerSet.length === 0) {
-                        alert('全部推送成功');
+                        alert('All pushed successfully');
                     } else {
                         let failedSet = [];
                         failedServerSet.forEach(failedSet.push);
@@ -404,13 +404,13 @@ app.controller('SentinelClusterAppServerListController', ['$scope', '$stateParam
                     location.reload();
                 } else {
                     if (data.code === UNSUPPORTED_CODE) {
-                        alert('该应用的 Sentinel 客户端不支持集群限流，请升级至 1.4.0 以上版本并引入相关依赖。');
+                        alert('The Sentinel client of this application does not support cluster current limiting, please upgrade to version 1.4.0 or later and introduce related dependencies. ');
                     } else {
-                        alert('推送失败：' + data.msg);
+                        alert('Push failed：' + data.msg);
                     }
                 }
             }).error(() => {
-                alert('未知错误');
+                alert('Unknown Error');
             });
         }
 
@@ -423,22 +423,22 @@ app.controller('SentinelClusterAppServerListController', ['$scope', '$stateParam
             } else if ($scope.serverAssignDialogData.type === 'edit') {
                 doApplySingleServerAssignEdit();
             } else {
-                alert('未知的操作');
+                alert('unknown operation');
             }
         };
 
         function checkAssignDialogValid() {
             let serverData = $scope.serverAssignDialogData.serverData;
             if (serverData.currentServer === undefined || serverData.currentServer === '') {
-                alert('请指定有效的 Token Server');
+                alert('Please specify a valid Token Server');
                 return false;
             }
             if (serverData.serverPort === undefined || serverData.serverPort <= 0 || serverData.serverPort > 65535) {
-                alert('请输入合法的端口值');
+                alert('Please enter a valid port');
                 return false;
             }
             if (serverData.maxAllowedQps !== undefined && serverData.maxAllowedQps < 0) {
-                alert('请输入合法的最大允许 QPS');
+                alert('Please enter a legal maximum allowed QPS');
                 return false;
             }
             return true;
@@ -505,13 +505,13 @@ app.controller('SentinelClusterAppServerListController', ['$scope', '$stateParam
                 } else {
                     $scope.serverVOList = {};
                     if (data.code === UNSUPPORTED_CODE) {
-                        $scope.loadError = {message: '该应用的 Sentinel 客户端不支持集群限流，请升级至 1.4.0 以上版本并引入相关依赖。'}
+                        $scope.loadError = {message: 'The Sentinel client of this application does not support cluster current limiting, please upgrade to version 1.4.0 or later and introduce related dependencies. '}
                     } else {
                         $scope.loadError = {message: data.msg};
                     }
                 }
             }).error(() => {
-                $scope.loadError = {message: '未知错误'};
+                $scope.loadError = {message: 'Unknown Error'};
             });
         }
 
@@ -521,11 +521,11 @@ app.controller('SentinelClusterAppServerListController', ['$scope', '$stateParam
         $scope.unbindServer = (id) => {
             $scope.pendingUnbindIds = [id];
             $scope.confirmDialog = {
-                title: '移除 Token Server',
+                title: 'Delete Token Server',
                 type: 'unbind_token_server',
-                attentionTitle: '请确认是否移除以下 Token Server（该 server 下的 client 也会解除分配）',
+                attentionTitle: 'Please confirm whether to delete the following Token Server (clients under this server will also be deallocated)',
                 attention: id + '',
-                confirmBtnText: '移除',
+                confirmBtnText: 'Delete',
             };
             confirmUnbindServerDialog = ngDialog.open({
                 template: '/app/views/dialog/confirm-dialog.html',
@@ -540,21 +540,21 @@ app.controller('SentinelClusterAppServerListController', ['$scope', '$stateParam
                     let failedServerSet = data.data.failedServerSet;
                     let failedClientSet = data.data.failedClientSet;
                     if (failedClientSet.length === 0 && failedServerSet.length === 0) {
-                        alert('成功');
+                        alert('Success');
                     } else {
-                        alert('操作推送完毕，部分失败机器列表：' + JSON.stringify(failedClientSet));
+                        alert('After the operation is pushed, some failed server are listed：' + JSON.stringify(failedClientSet));
                     }
 
                     location.reload();
                 } else {
                     if (data.code === UNSUPPORTED_CODE) {
-                        alert('该应用的 Sentinel 客户端不支持集群限流，请升级至 1.4.0 以上版本并引入相关依赖。');
+                        alert('The Sentinel client of this application does not support cluster current limiting, please upgrade to version 1.4.0 or later and introduce related dependencies. ');
                     } else {
-                        alert('推送失败：' + data.msg);
+                        alert('Push failed：' + data.msg);
                     }
                 }
             }).error(() => {
-                alert('未知错误');
+                alert('Unknown Error');
             });
             // confirmUnbindServerDialog.close();
         }

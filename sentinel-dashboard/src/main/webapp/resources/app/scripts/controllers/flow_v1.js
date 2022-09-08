@@ -29,14 +29,14 @@ app.controller('FlowControllerV1', ['$scope', '$stateParams', 'FlowServiceV1', '
 
     $scope.generateThresholdTypeShow = (rule) => {
       if (!rule.clusterMode) {
-        return '单机';
+        return 'stand alone';
       }
       if (rule.clusterConfig.thresholdType === 0) {
-        return '集群均摊';
+        return 'cluster equalization';
       } else if (rule.clusterConfig.thresholdType === 1) {
-        return '集群总体';
+        return 'Cluster population';
       } else {
-        return '集群';
+        return 'Cluster';
       }
     };
 
@@ -63,9 +63,9 @@ app.controller('FlowControllerV1', ['$scope', '$stateParams', 'FlowServiceV1', '
     $scope.editRule = function (rule) {
       $scope.currentRule = angular.copy(rule);
       $scope.flowRuleDialog = {
-        title: '编辑流控规则',
+        title: 'Edit flow control rules',
         type: 'edit',
-        confirmBtnText: '保存',
+        confirmBtnText: 'Save',
         showAdvanceButton: rule.controlBehavior == 0 && rule.strategy == 0
       };
       flowRuleDialog = ngDialog.open({
@@ -92,9 +92,9 @@ app.controller('FlowControllerV1', ['$scope', '$stateParams', 'FlowServiceV1', '
         }
       };
       $scope.flowRuleDialog = {
-        title: '新增流控规则',
+        title: 'Add flow control rules',
         type: 'add',
-        confirmBtnText: '新增',
+        confirmBtnText: 'Add',
         showAdvanceButton: true,
       };
       flowRuleDialog = ngDialog.open({
@@ -120,12 +120,12 @@ app.controller('FlowControllerV1', ['$scope', '$stateParams', 'FlowServiceV1', '
     $scope.deleteRule = function (rule) {
       $scope.currentRule = rule;
       $scope.confirmDialog = {
-        title: '删除流控规则',
+        title: 'Delete flow control rules',
         type: 'delete_rule',
-        attentionTitle: '请确认是否删除如下流控规则',
-        attention: '资源名: ' + rule.resource + ', 流控应用: ' + rule.limitApp
-          + ', 阈值类型: ' + (rule.grade == 0 ? '线程数' : 'QPS') + ', 阈值: ' + rule.count,
-        confirmBtnText: '删除',
+        attentionTitle: 'Please confirm whether to delete the following flow control rules',
+        attention: 'ResourceName: ' + rule.resource + ', limit Origin: ' + rule.limitApp
+          + ', metric type: ' + (rule.grade == 0 ? 'thread count' : 'QPS') + ', threshold: ' + rule.count,
+        confirmBtnText: 'Delete',
       };
       confirmDialog = ngDialog.open({
         template: '/app/views/dialog/confirm-dialog.html',
@@ -148,7 +148,7 @@ app.controller('FlowControllerV1', ['$scope', '$stateParams', 'FlowServiceV1', '
           getMachineRules();
           confirmDialog.close();
         } else {
-          alert('失败：' + data.msg);
+          alert('Failed：' + data.msg);
         }
       });
     };
@@ -159,7 +159,7 @@ app.controller('FlowControllerV1', ['$scope', '$stateParams', 'FlowServiceV1', '
           getMachineRules();
           flowRuleDialog.close();
         } else {
-          alert('失败：' + data.msg);
+          alert('Failed：' + data.msg);
         }
       });
     };
@@ -181,7 +181,7 @@ app.controller('FlowControllerV1', ['$scope', '$stateParams', 'FlowServiceV1', '
             confirmDialog.close();
           }
         } else {
-          alert('失败：' + data.msg);
+          alert('Failed：' + data.msg);
         }
       });
     }
